@@ -48,6 +48,12 @@ The project build is standalone for Windows 64b. Only download the latest build 
 9. Convert
 10. Open converted file in i2 Pro
 
+## How to run
+
+`dotnet build Aim_2_MoTeC.sln`
+`dotnet run --project Aim_2_MoTeC/Aim_2_MoTeC.csproj`
+
+
 ## Configuration
 
 Feel free to configure NameConversion.txt to use names that should be converted to MoTeC
