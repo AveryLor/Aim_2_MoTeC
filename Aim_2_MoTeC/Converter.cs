@@ -146,19 +146,27 @@ namespace Aim_2_MoTeC
         {
             try
             {
+                Console.WriteLine($"Searching in directory: {directoryPath}");
+                
                 // Search for .drk files in the current directory
-                paths.AddRange(Directory.GetFiles(directoryPath, "*.drk"));
-                paths.AddRange(Directory.GetFiles(directoryPath, "*.xrk"));
+                string[] drkFiles = Directory.GetFiles(directoryPath, "*.drk");
+                string[] xrkFiles = Directory.GetFiles(directoryPath, "*.xrk");
+                
+                Console.WriteLine($"Found {drkFiles.Length} .drk files and {xrkFiles.Length} .xrk files");
+                
+                paths.AddRange(drkFiles);
+                paths.AddRange(xrkFiles);
 
                 // Recursively search subdirectories
                 string[] subdirectories = Directory.GetDirectories(directoryPath);
+                Console.WriteLine($"Found {subdirectories.Length} subdirectories");
 
                 foreach (string subdirectory in subdirectories)
                     SearchForDrkFiles(subdirectory, paths);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                Console.WriteLine("Error searching for files: " + ex.Message);
             }
         }
         /// <summary>

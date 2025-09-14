@@ -1,4 +1,5 @@
 # Aim_2_MoTeC
+
 ![image](https://github.com/ludovicb1239/Aim_2_MoTeC/assets/59945694/f505ae17-38f9-4118-a4ca-edb87030bf27)
 
 ## Table of Contents
@@ -15,7 +16,7 @@
 
 Program that converts Aim RaceStudio Data to MoTeC i2 Pro Data.
 
-Programmed in VS C#. 
+Programmed in VS C#.
 
 Uses a dll to read from the file.
 
@@ -52,7 +53,6 @@ The project build is standalone for Windows 64b. Only download the latest build 
 
 `dotnet build Aim_2_MoTeC.sln`
 `dotnet run --project Aim_2_MoTeC/Aim_2_MoTeC.csproj`
-
 
 ## Configuration
 

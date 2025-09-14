@@ -177,15 +177,41 @@ namespace Aim_2_MoTeC
             DataLabel.Refresh();
             listBox1.Items.Clear();
 
-            List<string> filePaths = Converter.getFileList(inFilePath, folderMode);
+            try
+            {
+                Console.WriteLine($"Looking for files in: {inFilePath}");
+                Console.WriteLine($"Folder mode: {folderMode}");
+                
+                List<string> filePaths = Converter.getFileList(inFilePath, folderMode);
+                
+                Console.WriteLine($"Found {filePaths.Count} files:");
+                foreach (string file in filePaths)
+                {
+                    Console.WriteLine($"  - {file}");
+                }
 
-            Converter.Read(filePaths[0], UseRawGPSCheckBox.Checked, out List<string> data, out List<string> names);
+                if (filePaths.Count == 0)
+                {
+                    DataLabel.Text = "No .drk or .xrk files found in the specified path.";
+                    return;
+                }
 
-            DataLabel.Text = string.Join("\n", data);
+                Converter.Read(filePaths[0], UseRawGPSCheckBox.Checked, out List<string> data, out List<string> names);
 
-            foreach (string str in names)
-                listBox1.Items.Add(str);
-            listBox1.Refresh();
+                DataLabel.Text = string.Join("\n", data);
+
+                foreach (string str in names)
+                    listBox1.Items.Add(str);
+                listBox1.Refresh();
+            }
+            catch (Exception ex)
+            {
+                DataLabel.Text = "Error reading file: " + ex.Message;
+                Console.WriteLine("Error reading file: " + ex.Message);
+                Console.WriteLine("Stack trace: " + ex.StackTrace);
+                MessageBox.Show($"Error reading file: {ex.Message}\n\nThis could be due to:\n- Corrupted .drk/.xrk file\n- Unsupported file format\n- Missing DLL dependencies\n- File access permissions", 
+                    "File Read Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
         /// <summary>
         /// Updates the state (enabled or disabled) of certain buttons based on the current
